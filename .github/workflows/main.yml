@@ -1,0 +1,23 @@
+name: Main
+
+on: push
+
+jobs:
+  main:
+    name: Create PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout onyx
+        uses: actions/checkout@v3
+      - name: Change Readme
+        run: |
+          sed -i "s|Readme|antony|g" README.md
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Update README with hello
+          title: Updates README
+          body: This is an auto-generated PR
+          labels: automated pr
+          branch: test
